@@ -1,111 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --color-primary-50: #F9FEE8;
+  --color-primary-400: #D8F03E;
+  --color-primary-500: #D6F44A;
+  --color-primary-900: #384412;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --color-secondary-400: #A286FF;
+  --color-secondary-500: #8C6CF8;
+  --color-secondary-900: #2B1F59;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-gray-50: #F7F7F7;
+  --color-gray-100: #F1F1F1;
+  --color-gray-500: #8D8D8D;
+  --color-gray-600: #6A6A6A;
+  --color-gray-700: #4A4A4A;
+  --color-gray-900: #181818;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --brand-bg: rgba(247, 247, 247, 0.15);
+  --brand-surface: rgba(255, 255, 255, 0.25);
+  --brand-card: rgba(255, 255, 255, 0.2);
+  --brand-border: rgba(241, 241, 241, 0.15);
+  --brand-text-primary: var(--color-gray-900);
+  --brand-text-secondary: var(--color-gray-600);
+  --brand-text-muted: var(--color-gray-500);
+
+  --radius-page: 32px;
+  --radius-card: 24px;
+  --radius-button: 16px;
+  --radius-input: 14px;
+
+  --shadow-premium-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.03), 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+  --shadow-premium-md: 0 12px 24px -4px rgba(0, 0, 0, 0.04), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+  --shadow-premium-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.06), 0 8px 20px -4px rgba(0, 0, 0, 0.03);
+
+  --border-glass-light: rgba(255, 255, 255, 0.6);
+  --border-glass-dark: rgba(255, 255, 255, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+.dark {
+  --brand-bg: rgba(16, 18, 20, 0.12);
+  --brand-surface: rgba(23, 26, 29, 0.2);
+  --brand-card: rgba(29, 33, 37, 0.15);
+  --brand-border: rgba(42, 47, 52, 0.15);
+  --brand-text-primary: #F5F5F5;
+  --brand-text-secondary: #D3D3D3;
+  --brand-text-muted: #A0A0A0;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  --shadow-premium-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-premium-md: 0 12px 32px rgba(0, 0, 0, 0.3);
+  --shadow-premium-lg: 0 24px 48px rgba(0, 0, 0, 0.4);
 }
 
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  color: var(--brand-text-primary);
+  transition: color 0.2s ease;
+  background: var(--color-gray-50);
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+.dark body {
+  background: #101214;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(214, 244, 74, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(162, 134, 255, 0.3) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(232, 223, 255, 0.45) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.drag-region {
+  -webkit-app-region: drag;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.drag-region .no-drag,
+.no-drag {
+  -webkit-app-region: no-drag;
 }
+
+.dark body::before {
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(214, 244, 74, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(162, 134, 255, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(43, 31, 89, 0.25) 0%, transparent 50%);
+}
+
+/* Form inputs & select styling override to resolve invalid tailwind surface opacity in dark/light mode */
+input.rounded-input, select.rounded-input {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  color: var(--brand-text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark input.rounded-input, .dark select.rounded-input {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: var(--brand-text-primary) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Fix option list contrast in dark mode */
+.dark select.rounded-input option {
+  background-color: #1a1d21;
+  color: var(--brand-text-primary);
+}
+
+/* Hide scrollbars globally while preserving scroll functionality */
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

@@ -1,22 +1,45 @@
-import  { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path'
 import { isDev } from './utils.js';
+import { getPreloadPath } from './pathResolver.js';
 
-// type test = string;
+let win: BrowserWindow | null = null
+
 const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600
+  win = new BrowserWindow({
+    width: 1280,
+    height: 800,
+    frame: !app.isPackaged,
+    titleBarStyle: app.isPackaged ? 'hidden' : undefined,
+    webPreferences: {
+      preload: getPreloadPath(),
+      contextIsolation: true,
+      nodeIntegration: false,
+    }
   })
 
-    if (isDev()) {
+  if (isDev()) {
     win.loadURL('http://localhost:5132');
   } else {
-   win.loadFile(path.join(app.getAppPath() , '/dist-react/index.html'));
+    win.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'));
   }
-
-  
 }
+
+ipcMain.on('window:minimize', () => {
+  win?.minimize()
+})
+
+ipcMain.on('window:maximize', () => {
+  if (win?.isMaximized()) {
+    win.unmaximize()
+  } else {
+    win?.maximize()
+  }
+})
+
+ipcMain.on('window:close', () => {
+  win?.close()
+})
 
 app.whenReady().then(() => {
   createWindow()
