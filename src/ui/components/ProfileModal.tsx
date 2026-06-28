@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 
 interface Props {
@@ -8,15 +10,24 @@ interface Props {
 export default function ProfileModal({ open, onClose }: Props) {
   const { currentUser, logout } = useAuth()
 
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [open, onClose])
+
   if (!open) return null
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100]" onClick={onClose}>
       {/* Invisible backdrop for closing, optional very subtle tint */}
       <div className="absolute inset-0 bg-black/[0.02] dark:bg-black/[0.15]" />
 
       <div
-        className="absolute top-[70px] right-6 w-72 rounded-2xl border border-white/50 dark:border-white/[0.08] bg-white/75 dark:bg-[#1a1d21]/75 backdrop-blur-xl shadow-2xl p-5 hover:border-white/70 dark:hover:border-white/[0.12] transition-all duration-300 animate-in fade-in slide-in-from-top-2"
+        className="absolute top-[70px] right-6 w-72 rounded-2xl border border-white/50 dark:border-white/[0.08] bg-white/90 dark:bg-[#1a1d21]/75 backdrop-blur-xl shadow-2xl p-5 hover:border-white/70 dark:hover:border-white/[0.12] transition-all duration-300 animate-in fade-in slide-in-from-top-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3.5 mb-4">
@@ -52,7 +63,7 @@ export default function ProfileModal({ open, onClose }: Props) {
             </svg>
             <div className="min-w-0 flex-1">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-brand-text-muted leading-none mb-0.5">Email</p>
-              <p className="text-xs font-semibold text-brand-text-secondary truncate">{currentUser?.username || 'user'}@posits.app</p>
+              <p className="text-xs font-semibold text-brand-text-secondary truncate">{currentUser?.email || 'user@posits.app'}</p>
             </div>
           </div>
         </div>
@@ -69,7 +80,8 @@ export default function ProfileModal({ open, onClose }: Props) {
           Sign Out
         </button>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

@@ -4,26 +4,27 @@ interface User {
   username: string
   password: string
   fullName: string
+  email: string
 }
 
 interface AuthContextType {
   currentUser: User | null
   users: User[]
-  login: (username: string, password: string) => boolean
-  register: (fullName: string, username: string, password: string) => void
+  login: (email: string, password: string) => boolean
+  register: (fullName: string, username: string, password: string, email: string) => void
   logout: () => void
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-const defaultUser: User = { username: 'admin', password: 'admin', fullName: 'Shahzeb (Administrator)' }
+const defaultUser: User = { username: 'admin', password: 'admin', fullName: 'Shahzeb (Administrator)', email: 'admin@admin.com' }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [users, setUsers] = useState<User[]>([defaultUser])
   const [currentUser, setCurrentUser] = useState<User | null>(null)
 
-  const login = (username: string, password: string) => {
-    const match = users.find((u) => u.username === username && u.password === password)
+  const login = (email: string, password: string) => {
+    const match = users.find((u) => u.email === email && u.password === password)
     if (match) {
       setCurrentUser(match)
       return true
@@ -31,8 +32,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false
   }
 
-  const register = (fullName: string, username: string, password: string) => {
-    setUsers((prev) => [...prev, { username, password, fullName }])
+  const register = (fullName: string, username: string, password: string, email: string) => {
+    setUsers((prev) => [...prev, { username, password, fullName, email }])
   }
 
   const logout = () => setCurrentUser(null)

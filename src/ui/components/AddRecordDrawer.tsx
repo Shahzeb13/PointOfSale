@@ -21,7 +21,7 @@ export default function AddRecordDrawer({ open, onClose, title, children }: Prop
         <div className="fixed inset-0 z-[70] bg-black/30 backdrop-blur-sm" onClick={onClose} />
       )}
       <div
-        className={`fixed top-0 right-0 h-full z-[80] w-full max-w-md bg-white/80 dark:bg-[#1a1d21]/80 backdrop-blur-xl border-l border-white/40 dark:border-white/[0.10] shadow-premium-lg transition-transform duration-300 flex flex-col ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-9 right-0 h-[calc(100%-2.25rem)] z-[80] w-full max-w-md bg-white/80 dark:bg-[#1a1d21]/80 backdrop-blur-xl border-l border-white/40 dark:border-white/[0.10] rounded-l-2xl shadow-premium-lg transition-transform duration-300 flex flex-col ${open ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex items-center justify-between px-6 h-16 border-b border-white/20 dark:border-white/[0.06]">
           <h2 className="text-lg font-semibold text-brand-text-primary">{title}</h2>

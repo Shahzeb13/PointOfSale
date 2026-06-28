@@ -35,7 +35,7 @@ interface NavIconProps {
 }
 
 function NavIcon({ type, active }: NavIconProps) {
-  const cls = `w-5 h-5 ${active ? 'text-brand-text-primary' : 'text-brand-text-muted'}`
+  const cls = `w-5 h-5 ${active ? 'text-gray-900' : 'text-brand-text-muted'}`
   const S = (children: React.ReactNode) => <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{children}</svg>
   switch (type) {
     case 'grid':
@@ -121,7 +121,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
   return (
     <>
       {open && (
-        <div className="fixed inset-0 bg-black/30 z-20 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/30 z-[100] lg:hidden" onClick={onClose} />
       )}
       <aside className={`fixed top-0 left-0 h-full z-30 bg-white/35 dark:bg-black/20 backdrop-blur-md border-r border-white/25 dark:border-white/[0.05] shadow-premium-sm transition-all duration-300 flex flex-col ${open ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:z-auto`}
         style={{ width: '240px', maxWidth: '260px', minWidth: '220px' }}

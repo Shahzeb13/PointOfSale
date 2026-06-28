@@ -8,17 +8,17 @@ import PasswordInput from '../components/PasswordInput'
 export default function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault(); setError('')
-    if (!username.trim() || !password.trim()) {
-      setError('Please enter both username and password.')
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password.')
       return
     }
-    const ok = login(username, password)
+    const ok = login(email, password)
     if (ok) navigate('/dashboard', { replace: true })
     else setError('User not found or credentials do not match.')
   }
@@ -40,8 +40,8 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-brand-text-secondary mb-1">Username</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" className="w-full px-4 py-2.5 rounded-input bg-brand-surface/50 border border-brand-border text-sm text-brand-text-primary placeholder:text-brand-text-muted outline-none focus:border-brand-primary transition-colors" />
+            <label className="block text-sm font-medium text-brand-text-secondary mb-1">Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="w-full px-4 py-2.5 rounded-input bg-brand-surface/50 border border-brand-border text-sm text-brand-text-primary placeholder:text-brand-text-muted outline-none focus:border-brand-primary transition-colors" />
           </div>
           <PasswordInput label="Password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
 

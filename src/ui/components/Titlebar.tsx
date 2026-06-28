@@ -18,15 +18,15 @@ export default function Titlebar() {
       <span className="text-xs font-medium text-brand-text-muted tracking-wide">Posits</span>
 
       {winCtrls && (
-        <div className="no-drag flex items-center gap-1">
-          <button onClick={winCtrls.minimize} className="w-3.5 h-3.5 rounded-full bg-accent-warning hover:brightness-110 transition-all flex items-center justify-center group" title="Minimize">
-            <svg className="opacity-0 group-hover:opacity-60 transition-opacity" width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+        <div className="no-drag fixed top-0 right-0 z-[110] flex items-center h-9 px-3 gap-1">
+          <button onClick={winCtrls.minimize} className="w-8 h-8 flex items-center justify-center text-brand-text-muted hover:text-brand-text-primary hover:bg-white/20 dark:hover:bg-white/[0.08] rounded transition-colors" title="Minimize">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /></svg>
           </button>
-          <button onClick={winCtrls.maximize} className="w-3.5 h-3.5 rounded-full bg-accent-success hover:brightness-110 transition-all flex items-center justify-center group" title="Maximize">
-            <svg className="opacity-0 group-hover:opacity-60 transition-opacity" width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
+          <button onClick={winCtrls.maximize} className="w-8 h-8 flex items-center justify-center text-brand-text-muted hover:text-brand-text-primary hover:bg-white/20 dark:hover:bg-white/[0.08] rounded transition-colors" title="Maximize">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
           </button>
-          <button onClick={winCtrls.close} className="w-3.5 h-3.5 rounded-full bg-red-400 hover:bg-red-500 hover:brightness-110 transition-all flex items-center justify-center group" title="Close">
-            <svg className="opacity-0 group-hover:opacity-60 transition-opacity" width="6" height="6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+          <button onClick={winCtrls.close} className="w-8 h-8 flex items-center justify-center text-brand-text-muted hover:text-red-400 hover:bg-red-500/10 rounded transition-colors" title="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
           </button>
         </div>
       )}

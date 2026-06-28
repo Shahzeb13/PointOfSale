@@ -9,6 +9,7 @@ export default function RegisterPage() {
   const { register } = useAuth()
   const navigate = useNavigate()
   const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -17,7 +18,7 @@ export default function RegisterPage() {
   const handleRegister = (e: FormEvent) => {
     e.preventDefault()
     setError('')
-    if (!fullName.trim() || !username.trim() || !password.trim() || !confirmPassword.trim()) {
+    if (!fullName.trim() || !email.trim() || !username.trim() || !password.trim() || !confirmPassword.trim()) {
       setError('All fields are required.')
       return
     }
@@ -25,7 +26,7 @@ export default function RegisterPage() {
       setError('Passwords do not match.')
       return
     }
-    register(fullName, username, password)
+    register(fullName, username, password, email)
     navigate('/login', { replace: true })
   }
 
@@ -43,6 +44,10 @@ export default function RegisterPage() {
           <div>
             <label className="block text-sm font-medium text-brand-text-secondary mb-1">Full Name</label>
             <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Your full name" className="w-full px-4 py-2.5 rounded-input bg-brand-surface/50 border border-brand-border text-sm text-brand-text-primary placeholder:text-brand-text-muted outline-none focus:border-brand-primary transition-colors" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-brand-text-secondary mb-1">Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" className="w-full px-4 py-2.5 rounded-input bg-brand-surface/50 border border-brand-border text-sm text-brand-text-primary placeholder:text-brand-text-muted outline-none focus:border-brand-primary transition-colors" />
           </div>
           <div>
             <label className="block text-sm font-medium text-brand-text-secondary mb-1">Username</label>

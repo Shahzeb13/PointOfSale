@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 interface Props {
   open: boolean
@@ -12,6 +13,15 @@ export default function CalendarModal({ open, onClose }: Props) {
   const now = new Date()
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth())
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [open, onClose])
 
   if (!open) return null
 
@@ -32,7 +42,7 @@ export default function CalendarModal({ open, onClose }: Props) {
   const cells: (number | null)[] = Array(firstDay).fill(null)
   for (let d = 1; d <= daysInMonth; d++) cells.push(d)
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-start justify-end p-4 pt-16 sm:pt-20 sm:pr-8" onClick={onClose}>
       <div className="absolute inset-0" />
       <div
@@ -77,6 +87,7 @@ export default function CalendarModal({ open, onClose }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
